@@ -172,7 +172,10 @@
             <a id="downloadButton" href="#" class="btn btn-success" download style="display: none;">📥 Télécharger la présentation</a>
         </div>
     </div>
-
+    <!-- Dynamically load saved content -->
+    <div id="dynamic-content">
+            <?php include("saved_code.html"); ?>
+        </div>
     <script>
         function showPresentation(group) {
             const presentations = {
@@ -208,5 +211,26 @@
             downloadButton.style.display = "inline-block";
         }
     </script>
+      <!-- Dynamic Content will be loaded here -->
+      <div id="dynamic-content"></div>
+
+      <script>
+          // Load saved content from saved_code.html dynamically
+          function loadContent() {
+              fetch('saved_code.html')
+                  .then(response => response.text())
+                  .then(data => {
+                      document.getElementById('dynamic-content').innerHTML = data;
+                  })
+                  .catch(error => console.error('Error loading content:', error));
+          }
+  
+          // Load content when the page is loaded
+          window.onload = loadContent;
+      </script>
+
+
+
+
 </body>
 </html>
